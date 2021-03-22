@@ -1,24 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
+import React /* useMemo, useState */ from "react";
+import "./App.css";
+import Form from "./components/Form";
+import { Navigation } from "./components/Navbar";
+import /* InfoList */ "./components/InfoList";
+import "./tools/bootstrap.min.css";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { FullContextProvider } from "./context/FullContext";
+import Inicio from "./components/Inicio";
+import Login from "./components/Login";
+import Register from "./components/Register";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <FullContextProvider>
+        <div className="App">
+          <Navigation />
+          <Switch>
+            <Route path="/" exact component={Inicio} />
+            <Route path="/login" component={Login} />
+            <Route path="/add-item" component={Form} />
+            <Route path="/register" component={Register} />
+          </Switch>
+        </div>
+      </FullContextProvider>
+    </Router>
   );
 }
 
